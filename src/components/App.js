@@ -35,19 +35,6 @@ function App() {
     setSelectedCard(false);
   }
 
-    // function handleEditAvatarClick() {
-  //   const popUpAvatar = document.querySelector('.pop-up_type_avatar')
-  //   popUpAvatar.classList.add('pop-up_opened')
-  // }
-  // function handleEditProfileClick() {
-  //   const popUpAvatar = document.querySelector('.pop-up_type_profile')
-  //   popUpAvatar.classList.add('pop-up_opened')
-  // }
-  // function handleAddPlaceClick() {
-  //   const popUpAvatar = document.querySelector('.pop-up_type_add-card')
-  //   popUpAvatar.classList.add('pop-up_opened')
-  // }
-
   useEffect(() => {
     function handleEscClose(evt) {
       return evt.key === 'Escape'? closeAllPopups() : null
