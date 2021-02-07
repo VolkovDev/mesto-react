@@ -61,6 +61,7 @@ function Main(props) {
                 key={card._id}
                 onCardClick={props.onCardClick}
                 card={card}
+                onCardImageClick={props.onCardImageClick}
               />
           ))}
         </section>

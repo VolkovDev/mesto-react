@@ -18,18 +18,10 @@ function PopupWithForm(props) {
           >
             <h3 className='pop-up__form-title'>{props.title}</h3>
               {props.children}
-            {/* <input name='input-name' type='text' id='name-input' value=''
-              className='pop-up__form-input pop-up__form-input_type_name' placeholder='Имя Фамилия' required minlength='2'
-              maxlength='40' autocomplete='off' />
-              <span className='pop-up__form-input-error' id='name-input-error'></span>
-
-              <input name='input-hobby' type='text' id='hobby-input' value=''
-                className='pop-up__form-input pop-up__form-input_type_hobby' placeholder='Хобби' required minlength='2'
-                maxlength='200' autocomplete='off' /> */}
-                {/* <span 
-                  className='pop-up__form-input-error'
-                  id='hobby-input-error'
-                ></span> */}
+          <button 
+            className='pop-up__form-btn-submit pop-up__form-btn-submit_comfirm' 
+            type='button'
+          >{props.buttonText}</button>
           </form>
         </div>
       </div>

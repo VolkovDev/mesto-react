@@ -10,6 +10,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
 
   function handleEditProfileClick() {
@@ -24,6 +26,10 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
+  function handleCardImageClick() {
+    setIsImagePopupOpen(true);
+  }
+
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -32,7 +38,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setIsImagePopupOpen(false);
   }
 
   useEffect(() => {
@@ -40,14 +46,14 @@ function App() {
       return evt.key === 'Escape'? closeAllPopups() : null
     }
 
-    if(isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || selectedCard) {
+    if(isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || isImagePopupOpen) {
       document.addEventListener('keydown', handleEscClose);
     } 
 
     return () => {
       document.removeEventListener('keydown', handleEscClose);
     }
-  }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen, selectedCard]);
+  }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen, isImagePopupOpen]);
 
   return (
     <>
@@ -60,6 +66,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
+          onCardImageClick={handleCardImageClick}
         />
 
         < Footer />
@@ -71,6 +78,7 @@ function App() {
           name='profile'
           onClose={closeAllPopups}
           isOpen={isEditProfilePopupOpen}
+          buttonText='Сохранить'
         >
           <input 
             name='input-name'
@@ -103,10 +111,7 @@ function App() {
             className='pop-up__form-input-error' 
             id='hobby-input-error'
           ></span>
-          <button 
-            className='pop-up__form-btn-submit' 
-            type='submit'
-          >Сохранить</button>
+
         </PopupWithForm>
 
         {/* Popup card */}
@@ -115,6 +120,7 @@ function App() {
           name='add-card'
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          buttonText='Создать'
         >
           <input 
             name='input-name-image' 
@@ -144,11 +150,7 @@ function App() {
             className='pop-up__form-input-error' 
             id='url-input-error'
           ></span>
-          <button 
-            className='pop-up__form-btn-submit' 
-            type='submit'
-          >Создать
-          </button>
+
         </PopupWithForm>
 
          {/* Popup avatar */}
@@ -157,6 +159,7 @@ function App() {
           name='avatar'
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          buttonText='Сохранить'
         >
           <input 
             name='input-avatar' 
@@ -170,10 +173,7 @@ function App() {
             className='pop-up__form-input-error' 
             id='avatar-input-error'
           ></span>
-          <button 
-            type='submit' 
-            className='pop-up__form-btn-submit' 
-          >Сохранить</button>
+
         </PopupWithForm>
 
         {/* Popup confirm */}
@@ -181,18 +181,16 @@ function App() {
           title='Вы уверены?'
           name='confirm'
           onClose={closeAllPopups}
+          buttonText='Да'
         >
-          <button 
-            className='pop-up__form-btn-submit pop-up__form-btn-submit_comfirm' 
-            type='button'
-          >Да
-          </button>
+
         </PopupWithForm>
 
         {/* Popup image */}
         <ImagePopup
           onClose={closeAllPopups}
           card={selectedCard}
+          isOpen={isImagePopupOpen}
         ></ImagePopup>
 
       </div>
