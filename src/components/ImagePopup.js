@@ -4,7 +4,7 @@ function ImagePopup(props) {
     <>
       <div 
         className={
-          props.card ? `pop-up pop-up_type_image-zoom pop-up_opened` : `pop-up pop-up_type_image-zoom`
+          props.isOpen ? `pop-up pop-up_type_image-zoom pop-up_opened` : `pop-up pop-up_type_image-zoom`
         }
       >
         <div 
