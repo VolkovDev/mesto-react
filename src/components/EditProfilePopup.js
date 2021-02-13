@@ -81,7 +81,6 @@ useEffect(() => {
             className='pop-up__form-input-error'
             id='hobby-input-error'
           ></span>
-
         </PopupWithForm>
   )
 
