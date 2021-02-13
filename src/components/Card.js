@@ -1,10 +1,38 @@
 import React from "react";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function Card(props) {
+function Card({card, onCardClick, onCardImageClick, onCardLike, onCardDelete}) {
+  const currentUser  = React.useContext(CurrentUserContext);
+  
   function handleClick() {
-    props.onCardClick(props.card);
-    props.onCardImageClick()
+    onCardClick(card);
+    onCardImageClick()
   }
+
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(card)
+  }
+
+
+  // Определяем, являемся ли мы владельцем текущей карточки
+const isOwn = card.owner._id === currentUser._id;
+
+// Создаём переменную, которую после зададим в `className` для кнопки удаления
+const cardDeleteButtonClassName = (
+  `card__delete-btn ${isOwn ? '' : 'card__delete-btn_non-active'}`
+);
+
+// Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+// Создаём переменную, которую после зададим в `className` для кнопки лайка
+const cardLikeButtonClassName = (
+  `card__like-btn ${ isLiked ? 'card__like-btn_active' : ''}`
+);
 
   return (
     <>
@@ -13,13 +41,14 @@ function Card(props) {
         <img 
           className="card__image"
           src={
-            props.card.link
+            card.link
             }
-          alt={props.card.name}
+          alt={card.name}
           onClick={handleClick} 
         />
         <button 
-          className="card__delete-btn"
+          onClick={handleDeleteClick}
+          className={cardDeleteButtonClassName}
           type="button"
         ></button>
         <div
@@ -28,21 +57,22 @@ function Card(props) {
           <h2
             className="card__title"
           > {
-              props.card.name
+              card.name
             }</h2>
           <div 
             className="card__like-container"
           >
             <button
               id="likeButton"
-              className="card__like-btn"
+              className={cardLikeButtonClassName}
               aria-label='Поставить лайк'
               type="button"
+              onClick={handleLikeClick}
             ></button>
             <div 
               className="card__like-counter"
             > {
-              props.card.likes.length ? props.card.likes.length : '0'
+              card.likes.length ? card.likes.length : '0'
               }
             </div>
           </div>
