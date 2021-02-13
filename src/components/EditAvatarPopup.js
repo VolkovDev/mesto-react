@@ -6,7 +6,8 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext"
 function EditAvatarPopup( { isOpen, onClose, onUpdateAvatar }) {
   const currentUser = useContext(CurrentUserContext)
 
-  const [avatar, setAvatar] = useState('')
+  // const [avatar, setAvatar] = useState('')
+  const avatarRef = React.useRef()
 
   // Обработчик изменения инпута обновляет стейт
   function avatarHandleChange(e) {
@@ -17,7 +18,7 @@ function EditAvatarPopup( { isOpen, onClose, onUpdateAvatar }) {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar /* Значение инпута, полученное с помощью рефа */,
+      avatar: avatarRef.current.value /* Значение инпута, полученное с помощью рефа */,
     });
   }
 
@@ -35,8 +36,9 @@ function EditAvatarPopup( { isOpen, onClose, onUpdateAvatar }) {
     buttonText='Сохранить'
   >
     <input
-      value={avatar}
+      // value={avatar}
       onChange={avatarHandleChange}
+      ref={avatarRef}
       name='input-avatar'
       id='avatar-input'
       type='url'
