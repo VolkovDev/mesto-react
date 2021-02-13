@@ -29,7 +29,7 @@ class Api {
       .then(this._headerResponse)
   }
 
-  patchEditProfile(name, about) {
+  patchEditProfile({name, about}) {
     return fetch(`${this._adress}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -70,29 +70,30 @@ class Api {
       .then(this._headerResponse)
   }
 
-  putHandlerLike(_id) {
-    return fetch(`${this._adress}/cards/likes/${_id}`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(this._headerResponse)
-  }
+  putHandlerLike(_id, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._adress}/cards/likes/${_id}`, {
+        method: 'PUT',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(this._headerResponse)
+    } else {
+      return fetch(`${this._adress}/cards/likes/${_id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(this._headerResponse)
+}
 
-  deleteLike(_id) {
-    return fetch(`${this._adress}/cards/likes/${_id}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(this._headerResponse)
-  }
+    }
 
-  patchRefreshAvatar(link) {
+  patchRefreshAvatar({avatar}) {
     return fetch(`${this._adress}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
@@ -100,7 +101,7 @@ class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        avatar: link
+        avatar
       })
     })
       .then(this._headerResponse)

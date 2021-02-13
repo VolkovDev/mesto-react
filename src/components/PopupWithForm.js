@@ -11,6 +11,7 @@ function PopupWithForm(props) {
             onClick={props.onClose}
           ></button>
           <form 
+            onSubmit={props.onSubmit}
             name={`${props.name}`} 
             action='#' 
             className={`pop-up__form pop-up__form_${props.name}`} 
@@ -20,7 +21,7 @@ function PopupWithForm(props) {
               {props.children}
           <button 
             className='pop-up__form-btn-submit pop-up__form-btn-submit_comfirm' 
-            type='button'
+            type='submit'
           >{props.buttonText}</button>
           </form>
         </div>
