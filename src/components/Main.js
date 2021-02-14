@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Card from './Card'
-import api from '../utils/Api.js'
+import {api} from '../utils/api.js'
 import {CurrentUserContext} from "../contexts/CurrentUserContext"
 // import avatarDefault from '../images/profile_avatar.jpg'
 

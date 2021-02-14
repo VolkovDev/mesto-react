@@ -1,6 +1,6 @@
 import '../index.css'
 import React, { useState, useEffect } from 'react'
-import api from '../utils/api.js';
+import  api  from '../utils/api'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
@@ -52,6 +52,7 @@ function App() {
         setCurrentUser(data)
         closeAllPopups()
       })
+      .catch(err => console.log(err))
   }
 
   function handleUpdateAvatar({avatar}) {
@@ -60,6 +61,7 @@ function App() {
       setCurrentUser(data)
       closeAllPopups()
     })
+    .catch(err => console.log(err))
   }
 
   function closeAllPopups() {
@@ -111,8 +113,8 @@ function App() {
       .then(data => {
         setCurrentUser(data)
       })
-      .catch(err => console.log(err));
-  }, []);
+      .catch(err => console.log(err))
+  }, [])
 
   useEffect(() => {
     function handleEscClose(evt) {

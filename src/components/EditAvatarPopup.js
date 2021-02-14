@@ -1,30 +1,26 @@
 import React from 'react'
-import {useState, useEffect, useContext} from 'react'
+// import { useContext } from 'react'
 import PopupWithForm from './PopupWithForm'
-import {CurrentUserContext} from "../contexts/CurrentUserContext"
+// import {CurrentUserContext} from "../contexts/CurrentUserContext"
 
 function EditAvatarPopup( { isOpen, onClose, onUpdateAvatar }) {
-  const currentUser = useContext(CurrentUserContext)
+  // const currentUser = useContext(CurrentUserContext)
 
   // const [avatar, setAvatar] = useState('')
   const avatarRef = React.useRef()
 
   // Обработчик изменения инпута обновляет стейт
-  function avatarHandleChange(e) {
-    setAvatar(e.target.value)
-  }
+  // function avatarHandleChange(e) {
+  //   setAvatar(e.target.value)
+  // }
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     onUpdateAvatar({
       avatar: avatarRef.current.value /* Значение инпута, полученное с помощью рефа */,
-    });
+    })
   }
-
-  useEffect(() => {
-    setAvatar(currentUser.avatar)
-  }, [currentUser]) 
 
   return (
     <PopupWithForm
@@ -36,8 +32,6 @@ function EditAvatarPopup( { isOpen, onClose, onUpdateAvatar }) {
     buttonText='Сохранить'
   >
     <input
-      // value={avatar}
-      onChange={avatarHandleChange}
       ref={avatarRef}
       name='input-avatar'
       id='avatar-input'
