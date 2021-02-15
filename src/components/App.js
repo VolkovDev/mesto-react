@@ -82,6 +82,7 @@ function App() {
       // Обновляем стейт
       setCards(newCards)
     })
+    .catch(err => console.log(err))
   }
 
   function handleCardDelete(card) {
@@ -90,6 +91,7 @@ function App() {
         const newCards = cards.filter((c) => c._id !== card._id)
         setCards(newCards)
       })
+      .catch(err => console.log(err))
   }
 
   function handleAddPlaceSubmit({ name, link }) {
@@ -98,6 +100,7 @@ function App() {
         setCards([newCard, ...cards])
         closeAllPopups()
       })
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
